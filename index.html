@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Necessity For All</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 3em;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .food-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 20px;
+            justify-content: center;
+        }
+        .food-item {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .food-item img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .food-item-content {
+            padding: 15px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .food-item h2 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 1.4em;
+        }
+        .food-item p {
+            color: #7f8c8d;
+            margin: 0;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .interaction-section {
+            max-width: 800px;
+            margin: 60px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .interaction-section h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .like-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .like-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 1em;
+            margin-right: 15px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .like-btn:hover {
+            background-color: #2980b9;
+        }
+        .like-icon {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+        .like-count {
+            font-size: 1.2em;
+            color: #2c3e50;
+        }
+        .comment-section h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .comment-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            resize: vertical;
+        }
+        .comment-form button {
+            padding: 12px 25px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 25px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+        .comment-form button:hover {
+            background-color: #27ae60;
+        }
+        .comments {
+            margin-top: 30px;
+        }
+        .comment {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        
+        .food-item:nth-child(5),
+        .food-item:nth-child(6) {
+            grid-column: auto;
+            max-width: none;
+            justify-self: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .food-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .food-items {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .interact-button-container {
+            text-align: center;
+            margin: 30px 0 40px;
+        }
+
+        .interact-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interact-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        .interact-btn:active {
+            transform: translateY(1px);
+        }
+
+        .interact-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 1;
+            }
+            20% {
+                transform: scale(25, 25);
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(40, 40);
+            }
+        }
+
+        .interact-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <h1>BASIC NECESSITY FOR ALL</h1>
+    <div class="interact-button-container">
+        <button class="interact-btn" onclick="scrollToInteraction()">
+            <span>Like & Comment</span>
+        </button>
+    </div>
+    <div class="food-items">
+        <div class="food-item">
+            <img src="https://assets.cntraveller.in/photos/60ba1fbf591f977adc977875/16:9/w_1024%2Cc_limit/2C16FW9.jpg" alt="Potato">
+            <div class="food-item-content">
+                <h2>Potato</h2>
+            </div>
+        </div>
+        <div class="food-item">
+            <img src="https://mlnf6rdzbkm2.i.optimole.com/w:1619/h:1080/q:mauto/f:best/https://www.formhealth.co/blog/wp-content/uploads/2023/04/iStock-153737841-scaled.jpg" alt="Rice">
+            <div class="food-item-content">
+                <h2>Rice</h2>
+            </div>
+        </div>
+        <div class="food-item">
+            <img src="https://lirp.cdn-website.com/cbf48001/dms3rep/multi/opt/a-comprehensive-guide-to-sugar-640w.jpg" alt="Sugar">
+            <div class="food-item-content">
+                <h2>Sugar</h2>
+            </div>
+        </div>
+        <div class="food-item">
+            <img src="https://www.escoffieronline.com/wp-content/uploads/2015/08/Olive-oil-being-poured-into-glass-bowl.jpeg" alt="Oil">
+            <div class="food-item-content">
+                <h2>Oil</h2>
+            </div>
+        </div>
+        <div class="food-item">
+            <img src="https://miro.medium.com/v2/resize:fit:1000/1*E1XbXpyexi8eCyH22vUPdw.jpeg" alt="Flour">
+            <div class="food-item-content">
+                <h2>Flour</h2>
+            </div>
+        </div>
+        <div class="food-item">
+            <img src="https://moonrice.net/wp-content/uploads/2022/08/DalPhotos-1.jpg" alt="Pulse">
+            <div class="food-item-content">
+                <h2>Pulse</h2>
+            </div>
+        </div>
+    </div>
+
+    <div id="interaction-section" class="interaction-section">
+        <h2>Interact with Us</h2>
+        <div class="like-section">
+            <button class="like-btn" onclick="likePost()">
+                <span class="like-icon">👍</span> Like
+            </button>
+            <span class="like-count">0 likes</span>
+        </div>
+        <div class="comment-section">
+            <h3>Comments</h3>
+            <form class="comment-form" onsubmit="addComment(event)">
+                <textarea placeholder="Add a comment" required></textarea>
+                <button type="submit">Post Comment</button>
+            </form>
+            <div class="comments"></div>
+        </div>
+    </div>
+
+    <script>
+        let likeCount = 0;
+
+        function likePost() {
+            likeCount++;
+            document.querySelector('.like-count').textContent = `${likeCount} like${likeCount !== 1 ? 's' : ''}`;
+        }
+
+        function addComment(event) {
+            event.preventDefault();
+            const textarea = document.querySelector('.comment-form textarea');
+            const commentsDiv = document.querySelector('.comments');
+            const comment = document.createElement('div');
+            comment.className = 'comment';
+            comment.textContent = textarea.value;
+            commentsDiv.insertBefore(comment, commentsDiv.firstChild);
+            textarea.value = '';
+        }
+
+        function scrollToInteraction() {
+            document.getElementById('interaction-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+    </script>
+</body>
+</html>
